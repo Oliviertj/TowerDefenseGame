@@ -6,8 +6,12 @@ public class Splatty : EnemyBase
     {
         base.Start();
         moveSpeed = 2f;
-        maxHealth = 3f;
-        currentHealth = maxHealth;
+
+        // Pas max health aan via het IHealth component
+        if (health is BasicHealth basicHealth)
+        {
+            basicHealth.SetMaxHealth(3f);
+        }
 
         SetColor(new Color(1f, 0.4f, 0.4f)); // lichtrood
     }

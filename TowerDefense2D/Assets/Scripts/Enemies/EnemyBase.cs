@@ -5,23 +5,26 @@ public class EnemyBase : MonoBehaviour, ITargetable
 {
     [Header("Stats")]
     [SerializeField] protected float moveSpeed = 1f;
-    [SerializeField] protected float maxHealth = 5f;
 
     [Header("Visual")]
     [SerializeField] protected Color enemyColor = Color.white;
 
     [Header("Path following")]
-    [SerializeField] private List<Vector2> path = new List<Vector2>();  // Pad naar volgorden.
-    private int currentPathIndex = 0; // Huidig punt op het pad
+    [SerializeField] private List<Vector2> path = new List<Vector2>();
+    private int currentPathIndex = 0;
 
-    protected float currentHealth;
     protected SpriteRenderer spriteRenderer;
+    protected IHealth health;
 
-    public bool IsAlive => currentHealth > 0f;
+    public bool IsAlive => health != null && health.Current > 0f;
 
     protected virtual void Start()
     {
-        currentHealth = maxHealth;
+        health = GetComponent<IHealth>();
+        if (health == null)
+        {
+            Debug.LogWarning($"{gameObject.name} heeft geen IHealth component!");
+        }
 
         // Haal de SpriteRenderer op
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -64,6 +67,11 @@ public class EnemyBase : MonoBehaviour, ITargetable
         }
     }
 
+    public void SetPath(List<Vector2> newPath)
+    {
+        path = newPath;
+    }
+
     protected virtual void MoveAlongPath()
     {
         // Als er een pad is, beweeg naar het volgende punt
@@ -90,12 +98,9 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     public virtual void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        if (currentHealth <= 0f)
-        {
-            Die();
-        }
+        health?.TakeDamage(amount);
     }
+
 
     protected virtual void Die()
     {
