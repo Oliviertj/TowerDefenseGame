@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyBase : MonoBehaviour, ITargetable
 {
@@ -8,6 +9,10 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     [Header("Visual")]
     [SerializeField] protected Color enemyColor = Color.white;
+
+    [Header("Path following")]
+    [SerializeField] private List<Vector2> path = new List<Vector2>();  // Pad naar volgorden.
+    private int currentPathIndex = 0; // Huidig punt op het pad
 
     protected float currentHealth;
     protected SpriteRenderer spriteRenderer;
@@ -28,11 +33,20 @@ public class EnemyBase : MonoBehaviour, ITargetable
         {
             Debug.LogWarning($"Enemy '{gameObject.name}' mist een SpriteRenderer component.");
         }
+
+        // Eventueel, stel je het pad hier in, anders stel het in via de editor of een andere manier
+        if (path.Count == 0)
+        {
+            Debug.LogWarning("Path is not set for this enemy.");
+        }
     }
 
     protected virtual void Update()
     {
-        Move();
+        if (path.Count > 0)
+        {
+            MoveAlongPath();
+        }
     }
 
     protected void SetColor(Color color)
@@ -50,9 +64,28 @@ public class EnemyBase : MonoBehaviour, ITargetable
         }
     }
 
-    protected virtual void Move()
+    protected virtual void MoveAlongPath()
     {
-        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+        // Als er een pad is, beweeg naar het volgende punt
+        if (currentPathIndex < path.Count)
+        {
+            // Beweeg naar het huidige padpunt
+            Vector2 targetPosition = path[currentPathIndex];
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // Als de vijand het doelpunt bereikt heeft, ga dan naar het volgende punt
+            if ((Vector2)transform.position == targetPosition)
+            {
+                currentPathIndex++;
+            }
+        }
+        else
+        {
+            // Als de vijand het einde van het pad heeft bereikt, kan je hier code toevoegen om te zeggen dat de vijand het pad heeft verlaten.
+            // Bijvoorbeeld: de vijand is bij het doel (zoals het verdedigen van de basis).
+            Debug.Log("Enemy reached the end of the path.");
+            Die();
+        }
     }
 
     public virtual void TakeDamage(float amount)
