@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [Header("Enemy Setup")]
+    [SerializeField] private List<GameObject> enemyPrefabs;  // meerdere vijand-types
     [SerializeField] private float spawnInterval = 2f;
 
     private float spawnTimer;
@@ -11,7 +12,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        // Haal het pad op
         path = FindObjectOfType<Map>()?.GetPath();
 
         if (path == null || path.Count == 0)
@@ -20,8 +20,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        // Zet de spawner op de eerste tile van het pad
-        transform.position = path[0];
+        transform.position = path[0]; // zet spawner op eerste padpunt
     }
 
     void Update()
@@ -32,14 +31,26 @@ public class EnemySpawner : MonoBehaviour
 
         if (spawnTimer <= 0f)
         {
-            SpawnEnemy();
+            SpawnRandomEnemy();
             spawnTimer = spawnInterval;
         }
     }
 
-    void SpawnEnemy()
+    void SpawnRandomEnemy()
     {
-        GameObject enemyObj = Instantiate(enemyPrefab, path[0], Quaternion.identity);
+        if (enemyPrefabs.Count == 0)
+        {
+            Debug.LogWarning("Geen enemy prefabs gekoppeld!");
+            return;
+        }
+
+        // Kies willekeurige prefab
+        int index = Random.Range(0, enemyPrefabs.Count);
+        GameObject selectedPrefab = enemyPrefabs[index];
+
+        // Spawn enemy op het eerste padpunt
+        Vector3 spawnPos = new Vector3(path[0].x, path[0].y, -1f); // Z-positie iets lager dan de tiles
+        GameObject enemyObj = Instantiate(selectedPrefab, spawnPos, Quaternion.identity);
         EnemyBase enemy = enemyObj.GetComponent<EnemyBase>();
 
         if (enemy != null)

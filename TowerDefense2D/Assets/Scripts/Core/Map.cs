@@ -20,13 +20,16 @@ public class Map : MonoBehaviour
     public int Width { get { return width; } }
     public int Height { get { return height; } }
 
-
-    void Start()
+    private void Awake()
     {
         offset = new Vector2(width / 2f, height / 2f);
 
-        // Maak een eenvoudig pad dat van links naar rechts slingert
         CreatePath();
+
+    }
+
+    void Start()
+    {
 
         // Genereer de map met de juiste tiles
         GenerateMap();
@@ -34,25 +37,56 @@ public class Map : MonoBehaviour
 
     void CreatePath()
     {
-        // Startpunt aan de linkerkant
-        path.Add(new Vector2(0, 0));
+        // Handmatig opgegeven routepunten
+        List<Vector2Int> rawPoints = new List<Vector2Int>
+    {
+        new Vector2Int(0, 10),
+        new Vector2Int(5, 10),
+        new Vector2Int(5, 8),
+        new Vector2Int(10, 8),
+        new Vector2Int(15, 3),
+        new Vector2Int(20, 8),
+        new Vector2Int(20, 12),
+        new Vector2Int(25, 12),
+        new Vector2Int(30, 15),
+        new Vector2Int(40, 20),
+        new Vector2Int(49, 25),
+    };
 
-        for (int x = 1; x < width - 1; x++)
+        path.Clear();
+
+        for (int i = 0; i < rawPoints.Count - 1; i++)
         {
-            if (x % 2 == 0)
-                path.Add(new Vector2(x, 0));
-            else
-                path.Add(new Vector2(x, 1));
+            Vector2Int start = rawPoints[i];
+            Vector2Int end = rawPoints[i + 1];
+
+            // Eerst horizontaal
+            int xStep = start.x < end.x ? 1 : (start.x > end.x ? -1 : 0);
+            int yStep = start.y < end.y ? 1 : (start.y > end.y ? -1 : 0);
+
+            Vector2Int current = start;
+            path.Add((Vector2)current);
+
+            // Loop totdat we bij eindpunt zijn
+            while (current != end)
+            {
+                if (current.x != end.x)
+                    current.x += xStep;
+                else if (current.y != end.y)
+                    current.y += yStep;
+
+                path.Add((Vector2)current);
+            }
         }
 
-        path.Add(new Vector2(width - 1, 1));
-
-        // Pas alle punten aan zodat ze gecentreerd liggen
+        // Offset toepassen om map te centreren
         for (int i = 0; i < path.Count; i++)
         {
             path[i] -= offset;
         }
     }
+
+
 
 
     void GenerateMap()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class EnemyBase : MonoBehaviour, ITargetable
 {
@@ -74,27 +75,26 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     protected virtual void MoveAlongPath()
     {
-        // Als er een pad is, beweeg naar het volgende punt
         if (currentPathIndex < path.Count)
         {
-            // Beweeg naar het huidige padpunt
-            Vector2 targetPosition = path[currentPathIndex];
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            Vector3 currentPos = transform.position;
+            Vector2 target2D = path[currentPathIndex];
+            Vector3 targetPos = new Vector3(target2D.x, target2D.y, currentPos.z);
 
-            // Als de vijand het doelpunt bereikt heeft, ga dan naar het volgende punt
-            if ((Vector2)transform.position == targetPosition)
+            transform.position = Vector3.MoveTowards(currentPos, targetPos, moveSpeed * Time.deltaTime);
+
+            if ((Vector2)transform.position == target2D)
             {
                 currentPathIndex++;
             }
         }
         else
         {
-            // Als de vijand het einde van het pad heeft bereikt, kan je hier code toevoegen om te zeggen dat de vijand het pad heeft verlaten.
-            // Bijvoorbeeld: de vijand is bij het doel (zoals het verdedigen van de basis).
             Debug.Log("Enemy reached the end of the path.");
             Die();
         }
     }
+
 
     public virtual void TakeDamage(float amount)
     {
