@@ -6,6 +6,7 @@ public class Splatty : EnemyBase
     {
         base.Start();
         moveSpeed = 2f;
+        livesLost = 2f;
 
         // Pas max health aan via het IHealth component
         if (health is BasicHealth basicHealth)

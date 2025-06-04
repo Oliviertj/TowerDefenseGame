@@ -6,6 +6,7 @@ public class EnemyBase : MonoBehaviour, ITargetable
 {
     [Header("Stats")]
     [SerializeField] protected float moveSpeed = 1f;
+    [SerializeField] protected float livesLost = 1f;
 
     [Header("Visual")]
     [SerializeField] protected Color enemyColor = Color.white;
@@ -91,21 +92,31 @@ public class EnemyBase : MonoBehaviour, ITargetable
         else
         {
             Debug.Log("Enemy reached the end of the path.");
-            Die();
+            Die(reachedGoal: true);
         }
-    }
 
+
+
+    }
 
     public virtual void TakeDamage(float amount)
     {
         health?.TakeDamage(amount);
+        // health component roept Destroy(gameObject) al aan bij 0 HP
     }
 
 
-    protected virtual void Die()
+
+    protected virtual void Die(bool reachedGoal = false)
     {
+        if (reachedGoal)
+        {
+            LifeManager.Instance?.LoseLives(livesLost);
+        }
+
         Destroy(gameObject);
     }
+
 
     public Transform GetTransform()
     {

@@ -13,8 +13,7 @@ public class CameraController : MonoBehaviour
             // Simpelweg center op 0,0 als de map daar rondom geplaatst is
             Camera.main.transform.position = new Vector3(0f, 0f, -10f);
 
-            // Pas dit eventueel aan afhankelijk van de verhouding van je scherm
-            Camera.main.orthographicSize = map.Height / 2f + 1f;
+            Camera.main.orthographicSize = map.Height / 2;
         }
         else
         {

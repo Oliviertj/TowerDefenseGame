@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveTimer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI timerText;
+
+    private float timer;
+    private bool isCountingDown = false;
+
+    public void StartCountdown(float duration)
     {
-        
+        timer = duration;
+        isCountingDown = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (!isCountingDown) return;
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0f)
+        {
+            timer = 0f;
+            isCountingDown = false;
+        }
+
+        timerText.text = $"Volgende wave in: {timer:F1}s";
     }
 }

@@ -6,7 +6,7 @@ public class Gloop : EnemyBase
     {
         base.Start();
         moveSpeed = 0.5f;
-
+        livesLost = 3f;
         if (health is BasicHealth basicHealth)
         {
             basicHealth.SetMaxHealth(15f);
