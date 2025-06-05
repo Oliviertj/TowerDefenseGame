@@ -7,13 +7,14 @@ public class EnemyBase : MonoBehaviour, ITargetable
     [Header("Stats")]
     [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] protected float livesLost = 1f;
+    [SerializeField] protected float enemyWeight = 1f;
 
     [Header("Visual")]
     [SerializeField] protected Color enemyColor = Color.white;
 
     [Header("Path following")]
-    [SerializeField] private List<Vector2> path = new List<Vector2>();
-    private int currentPathIndex = 0;
+    [SerializeField] private List<Vector2> _path = new List<Vector2>();
+    private int _currentPathIndex = 0;
 
     protected SpriteRenderer spriteRenderer;
     protected IHealth health;
@@ -39,8 +40,7 @@ public class EnemyBase : MonoBehaviour, ITargetable
             Debug.LogWarning($"Enemy '{gameObject.name}' mist een SpriteRenderer component.");
         }
 
-        // Eventueel, stel je het pad hier in, anders stel het in via de editor of een andere manier
-        if (path.Count == 0)
+        if (_path.Count == 0)
         {
             Debug.LogWarning("Path is not set for this enemy.");
         }
@@ -48,7 +48,7 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     protected virtual void Update()
     {
-        if (path.Count > 0)
+        if (_path.Count > 0)
         {
             MoveAlongPath();
         }
@@ -71,22 +71,22 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     public void SetPath(List<Vector2> newPath)
     {
-        path = newPath;
+        _path = newPath;
     }
 
     protected virtual void MoveAlongPath()
     {
-        if (currentPathIndex < path.Count)
+        if (_currentPathIndex < _path.Count)
         {
             Vector3 currentPos = transform.position;
-            Vector2 target2D = path[currentPathIndex];
+            Vector2 target2D = _path[_currentPathIndex];
             Vector3 targetPos = new Vector3(target2D.x, target2D.y, currentPos.z);
 
             transform.position = Vector3.MoveTowards(currentPos, targetPos, moveSpeed * Time.deltaTime);
 
             if ((Vector2)transform.position == target2D)
             {
-                currentPathIndex++;
+                _currentPathIndex++;
             }
         }
         else
@@ -101,8 +101,7 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     public virtual void TakeDamage(float amount)
     {
-        health?.TakeDamage(amount);
-        // health component roept Destroy(gameObject) al aan bij 0 HP
+        health.TakeDamage(amount);
     }
 
 

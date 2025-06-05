@@ -12,23 +12,23 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _timeBetweenWaves = 5f;
 
     [Header("Enemy Prefabs")]
-    [SerializeField] private GameObject slimeyPrefab;
-    [SerializeField] private GameObject gloopPrefab;
-    [SerializeField] private GameObject splattyPrefab;
+    [SerializeField] private GameObject _slimeyPrefab;
+    [SerializeField] private GameObject _gloopPrefab;
+    [SerializeField] private GameObject _splattyPrefab;
 
 
-    private int currentWaveIndex = 0;
-    private List<Vector2> path;
+    private int _currentWaveIndex = 0;
+    private List<Vector2> _path;
 
-    private WaveTimer waveTimer;
+    private WaveTimer _waveTimer;
 
 
     void Start()
     {
-        path = FindObjectOfType<Map>()?.GetPath();
-        waveTimer = FindObjectOfType<WaveTimer>();
+        _path = FindObjectOfType<Map>()?.GetPath();
+        _waveTimer = FindObjectOfType<WaveTimer>();
 
-        if (path == null || path.Count == 0)
+        if (_path == null || _path.Count == 0)
         {
             Debug.LogError("Geen pad gevonden!");
             return;
@@ -56,15 +56,15 @@ public class WaveManager : MonoBehaviour
             {
                 // Eerste wave: 5 slimeys
                 for (int j = 0; j < 5; j++)
-                    wave.enemiesInThisWave.Add(slimeyPrefab);
+                    wave.enemiesInThisWave.Add(_slimeyPrefab);
             }
             else if (i == 1)
             {
                 // Tweede wave: 3 slimey + 2 gloop
                 for (int j = 0; j < 3; j++)
-                    wave.enemiesInThisWave.Add(slimeyPrefab);
+                    wave.enemiesInThisWave.Add(_slimeyPrefab);
                 for (int j = 0; j < 2; j++)
-                    wave.enemiesInThisWave.Add(gloopPrefab);
+                    wave.enemiesInThisWave.Add(_gloopPrefab);
             }
             else
             {
@@ -72,9 +72,9 @@ public class WaveManager : MonoBehaviour
                 for (int j = 0; j < 6 + i; j++)
                 {
                     int type = Random.Range(0, 3);
-                    if (type == 0) wave.enemiesInThisWave.Add(slimeyPrefab);
-                    else if (type == 1) wave.enemiesInThisWave.Add(gloopPrefab);
-                    else wave.enemiesInThisWave.Add(splattyPrefab);
+                    if (type == 0) wave.enemiesInThisWave.Add(_slimeyPrefab);
+                    else if (type == 1) wave.enemiesInThisWave.Add(_gloopPrefab);
+                    else wave.enemiesInThisWave.Add(_splattyPrefab);
                 }
             }
 
@@ -101,11 +101,17 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator RunWaves()
     {
-        while (currentWaveIndex < _waves.Count)
+        while (_currentWaveIndex < _waves.Count)
         {
-            Debug.Log($"Start ronde {currentWaveIndex + 1}");
+            Debug.Log($"Start ronde {_currentWaveIndex + 1}");
 
-            Wave currentWave = _waves[currentWaveIndex];
+            Wave currentWave = _waves[_currentWaveIndex];
+
+            // Start visuele timer meteen bij start van de wave
+            if (_waveTimer != null)
+                _waveTimer.StartCountdown(_timeBetweenWaves, currentWave.enemiesInThisWave.Count);
+
+            float waveTimeRemaining = _timeBetweenWaves;
 
             foreach (var enemyPrefab in currentWave.enemiesInThisWave)
             {
@@ -113,14 +119,12 @@ public class WaveManager : MonoBehaviour
                 yield return new WaitForSeconds(_timeBetweenSpawns);
             }
 
-            currentWaveIndex++;
-            if (waveTimer != null)
-                waveTimer.StartCountdown(_timeBetweenWaves);
+            _currentWaveIndex++;
 
-            float wait = _timeBetweenWaves;
-            while (wait > 0f)
+            // Wacht tot de timer afloopt (resterende tijd vanaf de wave start)
+            while (waveTimeRemaining > 0f)
             {
-                wait -= Time.deltaTime;
+                waveTimeRemaining -= Time.deltaTime;
                 yield return null;
             }
         }
@@ -128,14 +132,15 @@ public class WaveManager : MonoBehaviour
         Debug.Log("Alle rondes voltooid!");
     }
 
+
     void SpawnEnemy(GameObject enemyPrefab)
     {
-        Vector3 spawnPos = new Vector3(path[0].x, path[0].y, -1f);
+        Vector3 spawnPos = new Vector3(_path[0].x, _path[0].y, -1f);
         GameObject enemyObj = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
         if (enemyObj.TryGetComponent(out EnemyBase enemy))
         {
-            enemy.SetPath(path);
+            enemy.SetPath(_path);
         }
     }
 }

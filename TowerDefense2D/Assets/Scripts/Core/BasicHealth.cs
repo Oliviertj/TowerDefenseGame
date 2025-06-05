@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class BasicHealth : MonoBehaviour, IHealth
 {
-    [SerializeField] private float maxHealth = 5f;
-    private float currentHealth;
+    private float _maxHealth = 1f;
 
-    public float Current => currentHealth;
-    public float Max => maxHealth;
+    private float _currentHealth;
+    public float Current => _currentHealth;
+    public float Max => _maxHealth;
 
     public System.Action OnDeath;
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
     public void SetMaxHealth(float value)
     {
-        maxHealth = value;
-        currentHealth = value;
+        _maxHealth = value;
+        _currentHealth = value;
     }
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        if (currentHealth <= 0f)
+        _currentHealth -= amount;
+        if (_currentHealth <= 0f)
         {
             OnDeath?.Invoke();
             Destroy(gameObject); // of: gameObject.SetActive(false);
@@ -33,7 +33,7 @@ public class BasicHealth : MonoBehaviour, IHealth
 
     public void Heal(float amount)
     {
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        _currentHealth = Mathf.Min(_currentHealth + amount, _maxHealth);
     }
 
 }

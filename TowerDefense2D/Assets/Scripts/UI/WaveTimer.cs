@@ -5,27 +5,27 @@ public class WaveTimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
 
-    private float timer;
-    private bool isCountingDown = false;
+    private float _waveTimer;
+    private bool _isCountingDown = false;
 
-    public void StartCountdown(float duration)
+    public void StartCountdown(float duration, float enemyCount)
     {
-        timer = duration;
-        isCountingDown = true;
+        _waveTimer = duration + enemyCount;
+        _isCountingDown = true;
     }
 
     void Update()
     {
-        if (!isCountingDown) return;
+        if (!_isCountingDown) return;
 
-        timer -= Time.deltaTime;
+        _waveTimer -= Time.deltaTime;
 
-        if (timer <= 0f)
+        if (_waveTimer <= 0f)
         {
-            timer = 0f;
-            isCountingDown = false;
+            _waveTimer = 0f;
+            _isCountingDown = false;
         }
 
-        timerText.text = $"Volgende wave in: {timer:F1}s";
+        timerText.text = $"Volgende wave in: {_waveTimer:F0}s";
     }
 }

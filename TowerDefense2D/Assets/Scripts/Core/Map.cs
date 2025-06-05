@@ -4,25 +4,25 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
 
-    private Vector2 offset;
+    private Vector2 _offset;
 
     // Grootte van de map
-    public int width = 50;
-    public int height = 50;
+    [SerializeField] private int _width = 50;
+    [SerializeField] private int _height = 30;
 
     // Prefabs voor path en tower tiles
-    [SerializeField] private GameObject pathTilePrefab;  // Pad prefab (bruin)
-    [SerializeField] private GameObject mapTilePrefab; // Tower prefab (groen)
+    [SerializeField] private GameObject _pathTilePrefab;  // Pad prefab (bruin)
+    [SerializeField] private GameObject _mapTilePrefab; // Tower prefab (groen)
 
     // Lijst van coördinaten voor het pad
     private List<Vector2> path = new List<Vector2>();
 
-    public int Width { get { return width; } }
-    public int Height { get { return height; } }
+    public int Width { get { return _width; } }
+    public int Height { get { return _height; } }
 
     private void Awake()
     {
-        offset = new Vector2(width / 2f, height / 2f);
+        _offset = new Vector2(_width / 2f, _height / 2f);
 
         CreatePath();
 
@@ -82,7 +82,7 @@ public class Map : MonoBehaviour
         // Offset toepassen om map te centreren
         for (int i = 0; i < path.Count; i++)
         {
-            path[i] -= offset;
+            path[i] -= _offset;
         }
     }
 
@@ -91,20 +91,20 @@ public class Map : MonoBehaviour
 
     void GenerateMap()
     {
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < _height; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < _width; x++)
             {
-                Vector2 position = new Vector2(x, y) - offset;
-                Vector2 localCoord = new Vector2(x, y) - offset;
+                Vector2 position = new Vector2(x, y) - _offset;
+                Vector2 localCoord = new Vector2(x, y) - _offset;
 
                 if (path.Contains(position))
                 {
-                    Instantiate(pathTilePrefab, position, Quaternion.identity, transform);
+                    Instantiate(_pathTilePrefab, position, Quaternion.identity, transform);
                 }
                 else
                 {
-                    Instantiate(mapTilePrefab, position, Quaternion.identity, transform);
+                    Instantiate(_mapTilePrefab, position, Quaternion.identity, transform);
                 }
             }
         }

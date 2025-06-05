@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CannonTower : TowerBase
 {
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform shootPoint;
+    [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private Transform _shootPoint;
 
     protected override void Attack(ITargetable target)
     {
-        GameObject proj = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+        GameObject proj = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
         SimpleProjectile p = proj.GetComponent<SimpleProjectile>();
         p.SetTarget(target);
     }

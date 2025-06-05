@@ -7,9 +7,10 @@ public class Gloop : EnemyBase
         base.Start();
         moveSpeed = 0.5f;
         livesLost = 3f;
+        enemyWeight = 2.5f;
         if (health is BasicHealth basicHealth)
         {
-            basicHealth.SetMaxHealth(15f);
+            basicHealth.SetMaxHealth(8f);
         }
 
         SetColor(new Color(0.8f, 0.4f, 1f)); // paars

@@ -177,9 +177,9 @@ MonoBehaviour:
   - enemiesInThisWave: []
   _timeBetweenSpawns: 1
   _timeBetweenWaves: 5
-  slimeyPrefab: {fileID: 4625474036606538409, guid: d2518cef01205b84090ea14b44013e5a, type: 3}
-  gloopPrefab: {fileID: 4625474036606538409, guid: e7ec9ae898789e7438b0ecf508f6c25b, type: 3}
-  splattyPrefab: {fileID: 4625474036606538409, guid: 530695c2db3df094db8c4ea6d61021fe, type: 3}
+  _slimeyPrefab: {fileID: 4625474036606538409, guid: d2518cef01205b84090ea14b44013e5a, type: 3}
+  _gloopPrefab: {fileID: 4625474036606538409, guid: e7ec9ae898789e7438b0ecf508f6c25b, type: 3}
+  _splattyPrefab: {fileID: 4625474036606538409, guid: 530695c2db3df094db8c4ea6d61021fe, type: 3}
 --- !u!1 &656976245
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,10 +435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773d647051512a347bef8121aa509908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 50
-  height: 30
-  pathTilePrefab: {fileID: 1889538794016556671, guid: d7fc470e9ccc93f4fa94b54b71d11446, type: 3}
-  mapTilePrefab: {fileID: 8739257148427073436, guid: dbc28402bc319ce479759f0783ea0cd4, type: 3}
+  _width: 55
+  _height: 30
+  _pathTilePrefab: {fileID: 1889538794016556671, guid: d7fc470e9ccc93f4fa94b54b71d11446, type: 3}
+  _mapTilePrefab: {fileID: 8739257148427073436, guid: dbc28402bc319ce479759f0783ea0cd4, type: 3}
 --- !u!4 &1064146109
 Transform:
   m_ObjectHideFlags: 0
