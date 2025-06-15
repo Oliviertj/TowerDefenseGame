@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class SimpleProjectile : MonoBehaviour
 {
-    public float speed = 10f;
-    public float damage = 10f;
+    [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _damage = 10f;
+
+    [SerializeField] private float _lifetime = 5f;
+
 
     private ITargetable _target;
 
@@ -21,12 +24,19 @@ public class SimpleProjectile : MonoBehaviour
         }
 
         Vector2 direction = (_target.GetTransform().position - transform.position).normalized;
-        transform.position += (Vector3)(direction * speed * Time.deltaTime);
+        transform.position += (Vector3)(direction * _speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, _target.GetTransform().position) < 0.1f)
         {
-            _target.TakeDamage(damage);
+            _target.TakeDamage(_damage);
             Destroy(gameObject);
         }
+
+        _lifetime -= Time.deltaTime;
+        if (_lifetime <= 0f)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

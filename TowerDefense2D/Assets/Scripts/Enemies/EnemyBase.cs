@@ -9,6 +9,8 @@ public class EnemyBase : MonoBehaviour, ITargetable
     [SerializeField] protected float livesLost = 1f;
     [SerializeField] protected float enemyWeight = 1f;
 
+    public float EnemyWeight => enemyWeight;
+
     [Header("Visual")]
     [SerializeField] protected Color enemyColor = Color.white;
 

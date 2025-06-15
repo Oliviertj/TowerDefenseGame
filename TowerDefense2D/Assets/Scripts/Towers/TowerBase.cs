@@ -26,6 +26,11 @@ public abstract class TowerBase : MonoBehaviour
             Attack(currentTarget);
             fireCooldown = 1f / fireRate;
         }
+        if (currentTarget != null && _barrelRotator != null)
+        {
+            _barrelRotator.SetTarget(currentTarget.GetTransform());
+        }
+
     }
 
     protected bool InRange(ITargetable target)

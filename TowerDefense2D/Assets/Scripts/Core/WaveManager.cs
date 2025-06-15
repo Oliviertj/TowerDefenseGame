@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
 
-    [Header("Wave Configuratie")]
+    [Header("Wave Config")]
     [SerializeField] private List<Wave> _waves = new List<Wave>();
     [SerializeField] private float _timeBetweenSpawns = 1f;
     [SerializeField] private float _timeBetweenWaves = 5f;
 
-    [Header("Enemy Prefabs")]
+    [Header("Vaste Enemy voor Wave 1")]
     [SerializeField] private GameObject _slimeyPrefab;
-    [SerializeField] private GameObject _gloopPrefab;
-    [SerializeField] private GameObject _splattyPrefab;
 
+    [Header("Enemy Types")]
+    [SerializeField] private List<GameObject> _enemyPrefabs = new List<GameObject>();
 
     private int _currentWaveIndex = 0;
     private List<Vector2> _path;
 
     private WaveTimer _waveTimer;
-
 
     void Start()
     {
@@ -32,6 +32,11 @@ public class WaveManager : MonoBehaviour
         {
             Debug.LogError("Geen pad gevonden!");
             return;
+        }
+
+        if (_enemyPrefabs.Count == 0)
+        {
+            Debug.LogWarning("Geen enemy prefabs ingesteld! Voeg vijanden toe in de Inspector.");
         }
 
         if (_startButton != null)
@@ -54,35 +59,43 @@ public class WaveManager : MonoBehaviour
 
             if (i == 0)
             {
-                // Eerste wave: 5 slimeys
+                // Eerste wave: 5 vaste slimeys
                 for (int j = 0; j < 5; j++)
-                    wave.enemiesInThisWave.Add(_slimeyPrefab);
-            }
-            else if (i == 1)
-            {
-                // Tweede wave: 3 slimey + 2 gloop
-                for (int j = 0; j < 3; j++)
-                    wave.enemiesInThisWave.Add(_slimeyPrefab);
-                for (int j = 0; j < 2; j++)
-                    wave.enemiesInThisWave.Add(_gloopPrefab);
+                {
+                    if (_slimeyPrefab != null)
+                        wave.enemiesInThisWave.Add(_slimeyPrefab);
+                }
             }
             else
             {
-                // Andere waves: random mix
-                for (int j = 0; j < 6 + i; j++)
+                float targetWeight = 6 + i;
+                float currentWeight = 0f;
+
+                while (currentWeight < targetWeight && _enemyPrefabs.Count > 0)
                 {
-                    int type = Random.Range(0, 3);
-                    if (type == 0) wave.enemiesInThisWave.Add(_slimeyPrefab);
-                    else if (type == 1) wave.enemiesInThisWave.Add(_gloopPrefab);
-                    else wave.enemiesInThisWave.Add(_splattyPrefab);
+                    GameObject selected = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)];
+
+                    // Haal weight op uit EnemyBase component op de prefab zelf
+                    EnemyBase enemyBase = selected.GetComponent<EnemyBase>();
+                    if (enemyBase == null)
+                    {
+                        Debug.LogWarning($"{selected.name} mist EnemyBase component!");
+                        continue;
+                    }
+
+                    float weight = enemyBase.EnemyWeight;
+                    currentWeight += weight;
+                    wave.enemiesInThisWave.Add(selected);
                 }
             }
 
             _waves.Add(wave);
         }
 
-        Debug.Log("Waves gegenereerd via script.");
+        Debug.Log("Waves gegenereerd met weights via EnemyBase.");
     }
+
+
 
 
     [System.Serializable]
@@ -90,6 +103,7 @@ public class WaveManager : MonoBehaviour
     {
         public List<GameObject> enemiesInThisWave;
     }
+
     private void StartWaves()
     {
         if (_startButton != null)
@@ -97,7 +111,6 @@ public class WaveManager : MonoBehaviour
 
         StartCoroutine(RunWaves());
     }
-
 
     IEnumerator RunWaves()
     {
@@ -121,7 +134,6 @@ public class WaveManager : MonoBehaviour
 
             _currentWaveIndex++;
 
-            // Wacht tot de timer afloopt (resterende tijd vanaf de wave start)
             while (waveTimeRemaining > 0f)
             {
                 waveTimeRemaining -= Time.deltaTime;
@@ -131,7 +143,6 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log("Alle rondes voltooid!");
     }
-
 
     void SpawnEnemy(GameObject enemyPrefab)
     {

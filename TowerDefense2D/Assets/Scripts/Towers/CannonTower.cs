@@ -13,8 +13,8 @@ public class CannonTower : TowerBase
 
     protected override void Attack(ITargetable target)
     {
-        GameObject proj = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
-        SimpleProjectile p = proj.GetComponent<SimpleProjectile>();
+        GameObject projectile = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
+        SimpleProjectile p = projectile.GetComponent<SimpleProjectile>();
         p.SetTarget(target);
     }
 

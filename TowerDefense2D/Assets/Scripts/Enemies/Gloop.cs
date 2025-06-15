@@ -5,7 +5,7 @@ public class Gloop : EnemyBase
     protected override void Start()
     {
         base.Start();
-        moveSpeed = 0.5f;
+        moveSpeed = 0.75f;
         livesLost = 3f;
         enemyWeight = 2.5f;
         if (health is BasicHealth basicHealth)

@@ -15,6 +15,6 @@ public class Slurpy : EnemyBase
             basicHealth.SetMaxHealth(3f);
         }
 
-        SetColor(new Color(1f, 0.4f, 0.4f)); // lichtrood
+        SetColor(new Color(1f, 0.9f, 0.1f)); // idk
     }
 }

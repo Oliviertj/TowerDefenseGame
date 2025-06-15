@@ -5,7 +5,7 @@ public class Splatty : EnemyBase
     protected override void Start()
     {
         base.Start();
-        moveSpeed = 2f;
+        moveSpeed = 3f;
         livesLost = 2f;
         enemyWeight = 2f;
 
