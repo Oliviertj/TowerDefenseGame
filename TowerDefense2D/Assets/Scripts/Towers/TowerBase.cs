@@ -8,7 +8,12 @@ public abstract class TowerBase : MonoBehaviour
 
     protected float fireCooldown;
     protected ITargetable currentTarget;
+    private BarrelRotator _barrelRotator;
 
+    public virtual void Start()
+    {
+        _barrelRotator = GetComponent<BarrelRotator>();
+    }
     protected virtual void Update()
     {
         fireCooldown -= Time.deltaTime;

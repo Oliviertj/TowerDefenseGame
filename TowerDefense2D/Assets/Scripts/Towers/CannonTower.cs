@@ -5,6 +5,12 @@ public class CannonTower : TowerBase
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _shootPoint;
 
+    public override void Start()
+    {
+        base.Start();
+    }
+
+
     protected override void Attack(ITargetable target)
     {
         GameObject proj = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
