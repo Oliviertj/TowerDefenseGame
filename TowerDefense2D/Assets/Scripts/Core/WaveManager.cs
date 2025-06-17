@@ -76,16 +76,25 @@ public class WaveManager : MonoBehaviour
                     GameObject selected = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)];
 
                     // Haal weight op uit EnemyBase component op de prefab zelf
-                    EnemyBase enemyBase = selected.GetComponent<EnemyBase>();
+                    // Instantieer tijdelijk in geheugen
+                    GameObject temp = Instantiate(selected);
+                    EnemyBase enemyBase = temp.GetComponent<EnemyBase>();
+
                     if (enemyBase == null)
                     {
                         Debug.LogWarning($"{selected.name} mist EnemyBase component!");
+                        Destroy(temp);
                         continue;
                     }
 
+                    // Lees weight en vernietig tijdelijke instantie
                     float weight = enemyBase.EnemyWeight;
+                    Debug.Log($"Selected enemy: {enemyBase.name}, weight: {weight}");
+                    Destroy(temp);
+
                     currentWeight += weight;
                     wave.enemiesInThisWave.Add(selected);
+
                 }
             }
 

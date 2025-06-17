@@ -2,23 +2,8 @@ using UnityEngine;
 
 public class Gloop : EnemyBase
 {
-    protected override void Start()
-    {
-        base.Start();
-        moveSpeed = 0.75f;
-        livesLost = 3f;
-        enemyWeight = 2.5f;
-        if (health is BasicHealth basicHealth)
-        {
-            basicHealth.SetMaxHealth(8f);
-        }
-
-        SetColor(new Color(0.8f, 0.4f, 1f)); // paars
-    }
-
     public override void TakeDamage(float amount)
     {
-        float reducedDamage = amount * 0.5f;
-        base.TakeDamage(reducedDamage);
+        base.TakeDamage(amount * 0.5f); // Gloop is tanky
     }
 }

@@ -115,3 +115,7 @@ MonoBehaviour:
   enemyWeight: 1
   enemyColor: {r: 1, g: 1, b: 1, a: 1}
   _path: []
+  _moveSpeed: 1.25
+  _maxHealth: 4
+  _enemyWeight: 2
+  _livesLost: 1
