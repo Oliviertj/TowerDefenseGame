@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IHealth
 {
     float Current { get; }
@@ -5,4 +7,6 @@ public interface IHealth
 
     void TakeDamage(float amount);
     void Heal(float amount);
+
+    Transform GetTransform();
 }

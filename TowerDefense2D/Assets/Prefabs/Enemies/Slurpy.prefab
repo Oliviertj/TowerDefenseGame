@@ -110,12 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e34d75e35e82214a9e63efb1138767c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2.5
   livesLost: 1
-  enemyWeight: 1
-  enemyColor: {r: 1, g: 1, b: 1, a: 1}
+  enemyWeight: 1.5
+  maxHealth: 3
+  enemyColor: {r: 0.4716981, g: 0.05250975, b: 0.4363729, a: 1}
   _path: []
-  _moveSpeed: 1.25
-  _maxHealth: 4
-  _enemyWeight: 2
-  _livesLost: 1

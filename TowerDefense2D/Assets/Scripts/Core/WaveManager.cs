@@ -90,6 +90,7 @@ public class WaveManager : MonoBehaviour
                     // Lees weight en vernietig tijdelijke instantie
                     float weight = enemyBase.EnemyWeight;
                     Debug.Log($"Selected enemy: {enemyBase.name}, weight: {weight}");
+                    Debug.Log($"Selected enemy health {enemyBase.maxHealth}");
                     Destroy(temp);
 
                     currentWeight += weight;

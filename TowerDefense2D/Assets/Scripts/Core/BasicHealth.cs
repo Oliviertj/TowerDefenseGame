@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BasicHealth : MonoBehaviour, IHealth
 {
-    private float _maxHealth = 1f;
+    private float _maxHealth;
 
     private float _currentHealth;
     public float Current => _currentHealth;
@@ -10,9 +10,9 @@ public class BasicHealth : MonoBehaviour, IHealth
 
     public System.Action OnDeath;
 
-    private void Awake()
+    public Transform GetTransform()
     {
-        _currentHealth = _maxHealth;
+        return transform;
     }
 
     public void SetMaxHealth(float value)

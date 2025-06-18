@@ -7,6 +7,8 @@ public class EnemyBase : MonoBehaviour, ITargetable
     [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] protected float livesLost = 1f;
     [SerializeField] protected float enemyWeight = 1f;
+    [SerializeField] public float maxHealth = 5f;
+
     public float EnemyWeight => enemyWeight;
 
     [Header("Visual")]
@@ -25,7 +27,8 @@ public class EnemyBase : MonoBehaviour, ITargetable
         health = GetComponent<IHealth>();
         if (health == null)
             Debug.LogWarning($"{gameObject.name} heeft geen IHealth component!");
-
+        if (health is BasicHealth basicHealth)
+            basicHealth.SetMaxHealth(maxHealth);
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
             spriteRenderer.color = enemyColor;
@@ -34,6 +37,11 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
         if (_path.Count == 0)
             Debug.LogWarning("Path is not set for this enemy.");
+
+        GameObject healthBar = Instantiate(Resources.Load<GameObject>("HealthBar"), transform);
+        healthBar.GetComponent<HealthBar>().Initialize(health);
+
+
     }
 
     protected virtual void Update()

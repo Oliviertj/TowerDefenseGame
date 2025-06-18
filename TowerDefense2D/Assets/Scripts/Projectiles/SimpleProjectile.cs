@@ -15,6 +15,12 @@ public class SimpleProjectile : MonoBehaviour
         this._target = target;
     }
 
+    public void SetDamage(float value)
+    {
+        _damage = value;
+    }
+
+
     private void Update()
     {
         if (_target == null || !_target.IsAlive)
