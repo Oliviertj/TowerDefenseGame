@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EnemyBase : MonoBehaviour, ITargetable
 {
@@ -24,14 +25,17 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     protected SpriteRenderer spriteRenderer;
     protected IHealth health;
+
+    private Coroutine slowRoutine; 
     public bool IsAlive => health != null && health.Current > 0f;
 
     private void Awake()
     {
-        _originalSpeed = moveSpeed;
     }
     protected virtual void Start()
     {
+        _originalSpeed = moveSpeed;
+
         health = GetComponent<IHealth>();
         if (health == null)
             Debug.LogWarning($"{gameObject.name} heeft geen IHealth component!");
@@ -48,8 +52,6 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
         GameObject healthBar = Instantiate(Resources.Load<GameObject>("HealthBar"), transform);
         healthBar.GetComponent<HealthBar>().Initialize(health);
-
-
     }
 
     protected virtual void Update()
@@ -87,11 +89,31 @@ public class EnemyBase : MonoBehaviour, ITargetable
         }
     }
 
-    public void ApplySlow(float amount, float duration)
+    public virtual void ApplySlow(float amount, float duration)
     {
-        moveSpeed = (_originalSpeed - amount);
-        _slowTimer = duration;
+        if (GetComponent<SlowResistance>() != null)
+        {
+            Debug.Log($"{gameObject.name} is immuun voor slow.");
+            return;
+        }
+
+        if (slowRoutine != null)
+            StopCoroutine(slowRoutine);
+
+        slowRoutine = StartCoroutine(ApplySlowCoroutine(amount, duration));
     }
+
+    private IEnumerator ApplySlowCoroutine(float amount, float duration)
+    {
+        moveSpeed = _originalSpeed * (1f - Mathf.Clamp01(amount));
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = _originalSpeed;
+        slowRoutine = null;
+    }
+
+
     public virtual void TakeDamage(float amount)
     {
         health?.TakeDamage(amount);
