@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3283019, g: 0.098490536, b: 0.10791815, a: 1}
+  m_Color: {r: 0.5320754, g: 0.22540577, b: 0.051199697, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,8 +111,8 @@ Transform:
   m_GameObject: {fileID: 3764318322406399120}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.40000004, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2980486047155365579}
@@ -276,7 +276,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3207547, g: 0.28852794, b: 0.2777857, a: 1}
+  m_Color: {r: 0.32156864, g: 0.2901961, b: 0.2784314, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -328,10 +328,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4339993318657037486}
   - component: {fileID: 1759189842307287422}
-  - component: {fileID: 2406071590366269371}
+  - component: {fileID: 4704848865345435524}
   - component: {fileID: -2226001916117385393}
   m_Layer: 0
-  m_Name: CannonTurret
+  m_Name: SniperTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barrelPivot: {fileID: 969895905980438248}
   _rotationSpeed: 5
---- !u!114 &2406071590366269371
+--- !u!114 &4704848865345435524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,12 +376,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8531818709449144002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873ea64d3db1a8549a38731c47282358, type: 3}
+  m_Script: {fileID: 11500000, guid: 3842a0eb9bd9c0648a14e906773c2160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
-  fireRate: 1
-  damage: 1
+  range: 12
+  fireRate: 0.3
+  damage: 2.5
 --- !u!114 &-2226001916117385393
 MonoBehaviour:
   m_ObjectHideFlags: 0

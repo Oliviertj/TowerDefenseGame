@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3283019, g: 0.098490536, b: 0.10791815, a: 1}
+  m_Color: {r: 0.052353095, g: 0.5232683, b: 0.645283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -276,7 +276,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3207547, g: 0.28852794, b: 0.2777857, a: 1}
+  m_Color: {r: 0.10194267, g: 0.09404765, b: 0.4188679, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -328,10 +328,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4339993318657037486}
   - component: {fileID: 1759189842307287422}
-  - component: {fileID: 2406071590366269371}
   - component: {fileID: -2226001916117385393}
+  - component: {fileID: 7970989376470071730}
   m_Layer: 0
-  m_Name: CannonTurret
+  m_Name: SlowTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,21 +367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barrelPivot: {fileID: 969895905980438248}
   _rotationSpeed: 5
---- !u!114 &2406071590366269371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8531818709449144002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873ea64d3db1a8549a38731c47282358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 5
-  fireRate: 1
-  damage: 1
 --- !u!114 &-2226001916117385393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +379,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ef08c0835fbab4b80282728725eaae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 8661052710802530491, guid: b0396c5d9e93fa64a858eb268910f51e, type: 3}
+  _projectilePrefab: {fileID: 8661052710802530491, guid: ce966e1e4b577cc48bdb79aaaf2a6f72, type: 3}
   _shootPoints:
   - {fileID: 2980486047155365579}
+--- !u!114 &7970989376470071730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8531818709449144002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c15c048fc871b4c83d0eb76085c9e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  fireRate: 0.5
+  damage: 0.1

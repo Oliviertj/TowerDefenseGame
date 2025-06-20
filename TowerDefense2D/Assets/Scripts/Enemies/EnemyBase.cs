@@ -9,6 +9,10 @@ public class EnemyBase : MonoBehaviour, ITargetable
     [SerializeField] protected float enemyWeight = 1f;
     [SerializeField] public float maxHealth = 5f;
 
+    [Header("SlowProjectile")]
+    private float _originalSpeed;
+    private float _slowTimer;
+
     public float EnemyWeight => enemyWeight;
 
     [Header("Visual")]
@@ -22,6 +26,10 @@ public class EnemyBase : MonoBehaviour, ITargetable
     protected IHealth health;
     public bool IsAlive => health != null && health.Current > 0f;
 
+    private void Awake()
+    {
+        _originalSpeed = moveSpeed;
+    }
     protected virtual void Start()
     {
         health = GetComponent<IHealth>();
@@ -48,6 +56,16 @@ public class EnemyBase : MonoBehaviour, ITargetable
     {
         if (_path.Count > 0)
             MoveAlongPath();
+
+        // Reset snelheid na vertraging
+        if (_slowTimer > 0f)
+        {
+            _slowTimer -= Time.deltaTime;
+            if (_slowTimer <= 0f)
+            {
+                moveSpeed = _originalSpeed;
+            }
+        }
     }
 
     protected virtual void MoveAlongPath()
@@ -69,6 +87,11 @@ public class EnemyBase : MonoBehaviour, ITargetable
         }
     }
 
+    public void ApplySlow(float amount, float duration)
+    {
+        moveSpeed = (_originalSpeed - amount);
+        _slowTimer = duration;
+    }
     public virtual void TakeDamage(float amount)
     {
         health?.TakeDamage(amount);

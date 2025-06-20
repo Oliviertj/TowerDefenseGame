@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3918289670636722856}
   - component: {fileID: 7134325555736765714}
   m_Layer: 0
-  m_Name: CannonProjectile
+  m_Name: SimpleProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.8037735, g: 0.29418254, b: 0.10160909, a: 1}
   m_FlipX: 0
@@ -133,6 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e5e66c91ae36740bf9e3ec06a1200d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 25
   _damage: 10
   _lifetime: 5

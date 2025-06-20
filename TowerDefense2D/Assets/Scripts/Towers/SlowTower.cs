@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class CannonTower : TowerBase
+public class SlowTower : TowerBase
 {
     private ProjectileShooter _projectileShooter;
+
     public override void Start()
     {
         _projectileShooter = GetComponent<ProjectileShooter>();
         base.Start();
     }
-
 
     protected override void Attack(ITargetable target)
     {
@@ -23,6 +23,7 @@ public class CannonTower : TowerBase
             if (enemy.IsAlive && InRange(enemy))
                 return enemy;
         }
+
         return null;
     }
 }

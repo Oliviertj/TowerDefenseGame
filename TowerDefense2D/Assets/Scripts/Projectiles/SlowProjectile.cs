@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class SimpleProjectile : MonoBehaviour, IProjectile
+public class SlowProjectile : MonoBehaviour, IProjectile
 {
-    [SerializeField] private float _speed = 25f;
+    [SerializeField] private float _speed = 15f;
     [SerializeField] private float _lifetime = 5f;
+    [SerializeField] private float _slowAmount = 0.5f;
+    [SerializeField] private float _slowDuration = 2f;
 
     private ITargetable _target;
     private float _damage;
@@ -31,7 +33,12 @@ public class SimpleProjectile : MonoBehaviour, IProjectile
 
         if (Vector2.Distance(transform.position, _target.GetTransform().position) < 0.3f)
         {
-            _target.TakeDamage(_damage);
+            if (_target is EnemyBase enemy)
+            {
+                enemy.ApplySlow(_slowAmount, _slowDuration);
+                enemy.TakeDamage(_damage);
+            }
+
             Destroy(gameObject);
         }
 
