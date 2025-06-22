@@ -293,7 +293,7 @@ MonoBehaviour:
   _timeBetweenWaves: 6
   _slimeyPrefab: {fileID: 4625474036606538409, guid: d2518cef01205b84090ea14b44013e5a, type: 3}
   _enemyPrefabs:
-  - {fileID: 4625474036606538409, guid: ea8008f151496cf49b46f982604eabc5, type: 3}
+  - {fileID: 4625474036606538409, guid: b08993965b879074b90cd42693425516, type: 3}
 --- !u!1 &656976245
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,9 +35,6 @@ public class SniperTower : TowerBase
             }
         }
 
-        if (highestHpEnemy == null)
-            Debug.Log("Geen geldig target gevonden.");
-
         return highestHpEnemy;
     }
 

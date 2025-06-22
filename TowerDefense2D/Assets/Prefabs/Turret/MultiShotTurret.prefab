@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4101668868458367973}
   - component: {fileID: 6543505126793528538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5760830689537672909}
   - component: {fileID: 3834439044922691668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2980486047155365579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shootpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 901141751100481800}
   - component: {fileID: 7933023122710560676}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 16193092728666740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shootpoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8831501243626855635}
   - component: {fileID: 7831617628911343867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1045112864916142049}
   - component: {fileID: 6457209081526768107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 969895905980438248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BarrelPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8060824729258272034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shootpoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 1759189842307287422}
   - component: {fileID: 6098856323589162601}
   - component: {fileID: -2226001916117385393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MultiShotTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,10 +21,12 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     [Header("Path following")]
     [SerializeField] private List<Vector2> _path = new List<Vector2>();
-    private int _currentPathIndex = 0;
+    protected int _currentPathIndex = 0;
 
     protected SpriteRenderer spriteRenderer;
     protected IHealth health;
+
+    public IHealth Health => health;
 
     private Coroutine slowRoutine; 
     public bool IsAlive => health != null && health.Current > 0f;
@@ -119,8 +121,9 @@ public class EnemyBase : MonoBehaviour, ITargetable
         health?.TakeDamage(amount);
     }
 
-    protected virtual void Die(bool reachedGoal = false)
+    public virtual void Die(bool reachedGoal = false)
     {
+        Debug.Log($"Enemy {gameObject.name} died. ReachedGoal = {reachedGoal}");
         if (reachedGoal)
             LifeManager.Instance?.LoseLives(livesLost);
 
@@ -131,6 +134,23 @@ public class EnemyBase : MonoBehaviour, ITargetable
     {
         _path = newPath;
     }
+    public void SetPathWithProgress(List<Vector2> path, int startIndex)
+    {
+        _path = path;
+        _currentPathIndex = startIndex;
+    }
+
+
+    public List<Vector2> GetPath()
+    {
+        return _path;
+    }
+
+    public int GetPathIndex()
+    {
+        return _currentPathIndex;
+    }
+
 
     public Transform GetTransform()
     {
