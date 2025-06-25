@@ -79,7 +79,6 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-                // Voeg nieuwe enemy 1x toe (alleen tijdens introductie)
                 if (hasNewIntro && newEnemy != null)
                 {
                     wave.enemiesInThisWave.Add(newEnemy);
