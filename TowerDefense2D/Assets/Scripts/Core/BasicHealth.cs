@@ -24,20 +24,13 @@ public class BasicHealth : MonoBehaviour, IHealth
     public void TakeDamage(float amount)
     {
         _currentHealth -= amount;
+
         if (_currentHealth <= 0f)
         {
-            OnDeath?.Invoke();
-            if (TryGetComponent(out EnemyBase enemy))
-            {
-                enemy.Die(reachedGoal: false);
-            }
-            else
-            {
-                Destroy(gameObject); // fallback voor niet-enemy objecten
-            }
+            OnDeath?.Invoke(); // Alleen triggeren, geen destroy
         }
-
     }
+
 
     public void Heal(float amount)
     {

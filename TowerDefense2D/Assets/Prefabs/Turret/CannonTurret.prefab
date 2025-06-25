@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4101668868458367973}
   - component: {fileID: 6543505126793528538}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: BaseCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5760830689537672909}
   - component: {fileID: 3834439044922691668}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2980486047155365579}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: shootpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1045112864916142049}
   - component: {fileID: 6457209081526768107}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 969895905980438248}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: BarrelPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,8 @@ GameObject:
   - component: {fileID: 1759189842307287422}
   - component: {fileID: 2406071590366269371}
   - component: {fileID: -2226001916117385393}
-  m_Layer: 6
+  - component: {fileID: -5675618443963446127}
+  m_Layer: 8
   m_Name: CannonTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,3 +398,48 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 8661052710802530491, guid: b0396c5d9e93fa64a858eb268910f51e, type: 3}
   _shootPoints:
   - {fileID: 2980486047155365579}
+--- !u!61 &-5675618443963446127
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8531818709449144002}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5}
+  m_EdgeRadius: 0

@@ -118,8 +118,17 @@ public class EnemyBase : MonoBehaviour, ITargetable
 
     public virtual void TakeDamage(float amount)
     {
-        health?.TakeDamage(amount);
+        if (health == null) return;
+
+        health.TakeDamage(amount);
+
+        // Check handmatig of dood, en sterf als dat zo is
+        if (health.Current <= 0f)
+        {
+            Die(reachedGoal: false);
+        }
     }
+
 
     public virtual void Die(bool reachedGoal = false)
     {

@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 2595659988288551851}
   - component: {fileID: -7018140890906387766}
   - component: {fileID: -414166573223415756}
-  m_Layer: 0
+  - component: {fileID: -3331961536413154686}
+  m_Layer: 9
   m_Name: Stunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +116,7 @@ MonoBehaviour:
   moveSpeed: 2
   livesLost: 2
   enemyWeight: 3
-  maxHealth: 8
+  maxHealth: 10
   enemyColor: {r: 1, g: 1, b: 1, a: 1}
   _path: []
 --- !u!114 &-7018140890906387766
@@ -145,9 +146,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ff9e1e1724a9844ad266be7bcf332c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stunRadius: 2
-  stunDuration: 3
-  towerLayer:
+  _stunRadius: 5
+  _stunDuration: 3
+  _towerLayer:
     serializedVersion: 2
-    m_Bits: 64
-  stunVisualPrefab: {fileID: 132090026588844545, guid: b22e80bf794cb1c43ba5aac8c4797ab0, type: 3}
+    m_Bits: 256
+  _stunVisualPrefab: {fileID: 132090026588844545, guid: b22e80bf794cb1c43ba5aac8c4797ab0, type: 3}
+--- !u!58 &-3331961536413154686
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625474036606538409}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

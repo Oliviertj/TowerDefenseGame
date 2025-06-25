@@ -1,26 +1,28 @@
 using UnityEngine;
+using TMPro;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class ColorPulse : MonoBehaviour
 {
-    [Tooltip("Eerste kleur in de overgang (bijv. groen)")]
+    [Header("Kleuren")]
     [SerializeField] private Color _colorA = Color.white;
+    [SerializeField] private Color _colorB = Color.gray;
 
-    [Tooltip("Tweede kleur in de overgang (bijv. blauw)")]
-    [SerializeField] private Color _colorB = Color.white;
-
-    [Tooltip("Tijd (seconden) om tussen de kleuren te faden")]
+    [Header("Overgangstijd in seconden")]
     [SerializeField] private float _duration = 1.5f;
 
-    private SpriteRenderer _renderer;
+    private SpriteRenderer _spriteRenderer;
+    private TextMeshProUGUI _tmpUI;
+    private TextMeshPro _tmpWorld;
 
     void Start()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _tmpUI = GetComponent<TextMeshProUGUI>();
+        _tmpWorld = GetComponent<TextMeshPro>();
 
-        if (_renderer == null)
+        if (_spriteRenderer == null && _tmpUI == null && _tmpWorld == null)
         {
-            Debug.LogWarning("ColorPulse: SpriteRenderer niet gevonden!");
+            Debug.LogWarning($"ColorPulse op '{gameObject.name}': geen SpriteRenderer of TextMeshPro component gevonden!");
             enabled = false;
         }
     }
@@ -28,6 +30,15 @@ public class ColorPulse : MonoBehaviour
     void Update()
     {
         float t = Mathf.PingPong(Time.time / _duration, 1f);
-        _renderer.color = Color.Lerp(_colorA, _colorB, t);
+        Color lerped = Color.Lerp(_colorA, _colorB, t);
+
+        if (_spriteRenderer != null)
+            _spriteRenderer.color = lerped;
+
+        if (_tmpUI != null)
+            _tmpUI.color = lerped;
+
+        if (_tmpWorld != null)
+            _tmpWorld.color = lerped;
     }
 }

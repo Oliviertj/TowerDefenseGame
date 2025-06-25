@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6577810191306788384}
   - component: {fileID: 4399195792167101296}
   - component: {fileID: 4384274750842783462}
-  m_Layer: 0
+  - component: {fileID: -4297811869244371945}
+  m_Layer: 9
   m_Name: Frosty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f0ccb312d207342b52cb07df8b31dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 3.5
   livesLost: 2
   enemyWeight: 1.5
   maxHealth: 3
@@ -129,3 +130,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86a0fda20dc5c44b837700c51d1cafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &-4297811869244371945
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625474036606538409}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

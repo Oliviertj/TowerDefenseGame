@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: -280427023098366527}
   - component: {fileID: 4727267457617064486}
   - component: {fileID: -6333858704214832810}
-  m_Layer: 0
+  - component: {fileID: -3989127193987935757}
+  m_Layer: 9
   m_Name: Healey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,10 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcec637b0e3267446a34786dcf9a4114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  livesLost: 1
+  moveSpeed: 2
+  livesLost: 2
   enemyWeight: 1
-  maxHealth: 4
+  maxHealth: 4.5
   enemyColor: {r: 1, g: 1, b: 1, a: 1}
   _path: []
 --- !u!114 &4727267457617064486
@@ -149,3 +150,38 @@ MonoBehaviour:
   _colorA: {r: 0.1921128, g: 1, b: 0, a: 1}
   _colorB: {r: 0.065396875, g: 0.36306125, b: 0.6301887, a: 1}
   _duration: 1.5
+--- !u!58 &-3989127193987935757
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625474036606538409}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
