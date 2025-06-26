@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaveCounter : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI _waveText;
 
     private int currentWave;
 
@@ -16,9 +16,9 @@ public class WaveCounter : MonoBehaviour
 
     private void UpdateWaveText()
     {
-        if (waveText != null)
+        if (_waveText != null)
         {
-            waveText.text = $"Wave: {currentWave}";
+            _waveText.text = $"Wave: {currentWave}";
         }
         else
         {

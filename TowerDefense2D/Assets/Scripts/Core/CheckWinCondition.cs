@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class CheckWinCondition : MonoBehaviour
 {
-    public WaveManager waveManager; // Sleep hier je WaveManager in de Inspector
+   [SerializeField] private WaveManager waveManager;
 
     private bool _winTriggered = false;
 

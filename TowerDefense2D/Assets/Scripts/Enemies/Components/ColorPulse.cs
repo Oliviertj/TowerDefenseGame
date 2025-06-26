@@ -27,6 +27,9 @@ public class ColorPulse : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wisselt de kleur van verschillende componenten continu heen en weer tussen _colorA & _colorB
+    /// </summary>
     void Update()
     {
         float t = Mathf.PingPong(Time.time / _duration, 1f);
@@ -41,4 +44,5 @@ public class ColorPulse : MonoBehaviour
         if (_tmpWorld != null)
             _tmpWorld.color = lerped;
     }
+
 }

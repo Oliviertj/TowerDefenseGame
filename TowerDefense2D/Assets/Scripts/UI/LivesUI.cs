@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LivesUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI _livesText;
 
     void Start()
     {
-        if (livesText == null)
+        if (_livesText == null)
         {
             Debug.LogError("Geen LivesText component in Canvas gevonden!");
             return;
@@ -19,9 +19,9 @@ public class LivesUI : MonoBehaviour
 
     public void UpdateLivesDisplay()
     {
-        if (livesText != null && LifeManager.Instance != null)
+        if (_livesText != null && LifeManager.Instance != null)
         {
-            livesText.text = $"Levens: {LifeManager.Instance.GetCurrentLives()}";
+            _livesText.text = $"Levens: {LifeManager.Instance.GetCurrentLives()}";
         }
     }
 }

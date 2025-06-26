@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class BuildMenuUI : MonoBehaviour
 {
     [Header("Turrets")]
-    [SerializeField] private List<GameObject> turretPrefabs;
+    [SerializeField] private List<GameObject> _turretPrefabs;
 
     [Header("UI")]
-    [SerializeField] private Transform buttonContainer;
-    [SerializeField] private Button turretButtonPrefab;
+    [SerializeField] private Transform _buttonContainer;
+    [SerializeField] private Button _turretButtonPrefab;
 
     private BuildManager _buildManager;
 
@@ -18,9 +18,9 @@ public class BuildMenuUI : MonoBehaviour
     {
         _buildManager = FindObjectOfType<BuildManager>();
 
-        foreach (GameObject turret in turretPrefabs)
+        foreach (GameObject turret in _turretPrefabs)
         {
-            Button btn = Instantiate(turretButtonPrefab, buttonContainer);
+            Button btn = Instantiate(_turretButtonPrefab, _buttonContainer);
             TextMeshProUGUI label = btn.GetComponentInChildren<TextMeshProUGUI>();
             if (label != null)
                 label.text = turret.name;

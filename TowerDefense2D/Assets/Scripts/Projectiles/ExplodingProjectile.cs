@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Projectile die naar een doel beweegt, explodeert bij aankomst en schade toebrengt in een straal.
+/// </summary>
 public class ExplodingProjectile : MonoBehaviour, IProjectile
 {
     [SerializeField] private float _speed = 10f;
@@ -12,16 +15,27 @@ public class ExplodingProjectile : MonoBehaviour, IProjectile
     private float _damage;
     private ITargetable _target;
 
+    /// <summary>
+    /// Stelt het doel van het projectile in.
+    /// </summary>
+    /// <param name="target">Het doelwit</param>
     public void SetTarget(ITargetable target)
     {
         _target = target;
     }
 
+    /// <summary>
+    /// Stelt de schade in die het projectile toebrengt aan de target.
+    /// </summary>
+    /// <param name="amount">De hoeveelheid schade.</param>
     public void SetDamage(float amount)
     {
         _damage = amount;
     }
 
+    /// <summary>
+    /// Beweegt het projectile richting het doel en vernietigt het als het doel is bereikt of de tijd is verlopen.
+    /// </summary>
     private void Update()
     {
         if (_target == null || !_target.IsAlive)
@@ -44,9 +58,12 @@ public class ExplodingProjectile : MonoBehaviour, IProjectile
             Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Laat het projectile exploderen, brengt schade toe aan het hoofdtarget en aan andere vijanden binnen de explosiestraal.
+    /// </summary>
     private void Explode()
     {
-        // Spawn visueel effect
+        // Spawn visueel effect van de explosie
         if (_explosionEffectPrefab != null)
         {
             GameObject effect = Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
@@ -67,7 +84,7 @@ public class ExplodingProjectile : MonoBehaviour, IProjectile
             mainTarget.TakeDamage(_damage);
         }
 
-        // Schade aan vijanden in blast radius
+        // Schade aan vijanden binnen de blast radius behalve het hoofdtarget
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _blastRadius, _enemyLayer);
         foreach (var hit in hits)
         {
@@ -77,13 +94,4 @@ public class ExplodingProjectile : MonoBehaviour, IProjectile
             }
         }
     }
-
-
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _blastRadius);
-    }
-#endif
 }

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     
-    public GameObject guidePanel;
+    [SerializeField] private GameObject _guidePanel;
 
     public void PlayGame()
     {
@@ -13,12 +13,12 @@ public class MainMenu : MonoBehaviour
 
     public void ShowGuide()
     {
-        guidePanel.SetActive(true);
+        _guidePanel.SetActive(true);
     }
 
     public void CloseGuide()
     {
-        guidePanel.SetActive(false);
+        _guidePanel.SetActive(false);
     }
 
     public void QuitGame()

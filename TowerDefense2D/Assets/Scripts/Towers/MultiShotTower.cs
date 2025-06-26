@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class MultiShotTower : TowerBase
 {
-    [SerializeField] private int shotsPerAttack = 3;
+    [SerializeField] private int _shotsPerAttack = 3;
     private ProjectileShooter _projectileShooter;
 
     public override void Start()
@@ -14,7 +14,7 @@ public class MultiShotTower : TowerBase
 
     protected override void Attack(ITargetable target)
     {
-        List<EnemyBase> targets = FindMultipleTargets(shotsPerAttack);
+        List<EnemyBase> targets = FindMultipleTargets(_shotsPerAttack);
 
         foreach (var t in targets)
         {
@@ -30,7 +30,7 @@ public class MultiShotTower : TowerBase
         {
             if (enemy.IsAlive && InRange(enemy))
             {
-                return enemy; // we gebruiken dit alleen als trigger
+                return enemy;
             }
         }
 

@@ -20,6 +20,11 @@ public class SlowProjectile : MonoBehaviour, IProjectile
         _damage = amount;
     }
 
+    /// <summary>
+    /// Beweegt het projectiel richting het doel zolang de target leeft.
+    /// Bij het bereiken van het doel wordt schade toegebracht en het de target vertraagd.
+    /// Vernietigt het projectiel als de levensduur verloopt of de target wegvalt.
+    /// </summary>
     private void Update()
     {
         if (_target == null || !_target.IsAlive)

@@ -26,7 +26,13 @@ public class StunOnDeath : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Voert een stun-effect uit op alle torens binnen een bepaalde straal.
+    /// 
+    /// - Instantiate een effect op de positie van dit object.
+    /// - Detecteer alle torens binnen de stun-radius met behulp van Physics2D.OverlapCircleAll.
+    /// - Voor elke toren die het IStunnable heeft, wordt de Stun methode aangeroepen met de opgegeven duur.
+    /// </summary>
     private void OnStun()
     {
         Debug.Log("OnStun CALLED!");
@@ -47,16 +53,13 @@ public class StunOnDeath : MonoBehaviour
 
         // Zoek torens binnen radius
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _stunRadius, _towerLayer);
-        Debug.Log($"Found {hits.Length} colliders in stun radius.");
 
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent(out IStunnable stunnable))
             {
-                Debug.Log($"Stunning {hit.name} for {_stunDuration} seconds!");
                 stunnable.Stun(_stunDuration);
                 Debug.Log($"{gameObject.name} stunned {hit.name} for {_stunDuration}s");
-                Debug.DrawLine(transform.position, hit.transform.position, Color.red, 1.5f);
 
             }
             else
@@ -66,12 +69,4 @@ public class StunOnDeath : MonoBehaviour
 
         }
     }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, _stunRadius);
-    }
-#endif
 }

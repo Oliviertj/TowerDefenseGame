@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaveTimer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI _timerText;
 
     private float _waveTimer;
     private bool _isCountingDown = false;
@@ -26,6 +26,6 @@ public class WaveTimer : MonoBehaviour
             _isCountingDown = false;
         }
 
-        timerText.text = $"Volgende wave in: {_waveTimer:F0}s";
+        _timerText.text = $"Volgende wave in: {_waveTimer:F0}s";
     }
 }

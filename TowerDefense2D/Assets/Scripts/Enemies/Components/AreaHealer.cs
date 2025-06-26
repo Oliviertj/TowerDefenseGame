@@ -13,6 +13,11 @@ public class AreaHealer : MonoBehaviour
     private HealingAuraVisual _healingAuraInstance;
     private float _timer;
 
+    /// <summary>
+    /// Initialisatie van de healer.
+    /// Zet de timer op het interval en maakt de healing aura visual aan, 
+    /// waarbij de straal van de aura wordt ingesteld op de heal radius.
+    /// </summary>
     void Start()
     {
         _timer = _interval;
@@ -25,11 +30,14 @@ public class AreaHealer : MonoBehaviour
             if (_healingAuraInstance != null)
             {
                 _healingAuraInstance.SetRadius(_healRadius);
-                // _healingAuraInstance.SetColor(new Color(0f, 1f, 0.5f, 0.3f)); // optioneel
             }
         }
     }
 
+    /// <summary>
+    /// Update wordt elke frame aangeroepen.
+    /// Houdt bij wanneer de healer moet genezen aan de hand van de interval timer.
+    /// </summary>
     void Update()
     {
         _timer -= Time.deltaTime;
@@ -40,6 +48,11 @@ public class AreaHealer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Geneest alle vijanden binnen de heal radius met de opgegeven heal amount.
+    /// Verhoogt ook indien nodig de max health van de vijand.
+    /// Toont de healing aura visual wanneer er genezen is.
+    /// </summary>
     void HealNearbyEnemies()
     {
         bool didHeal = false;
@@ -55,6 +68,7 @@ public class AreaHealer : MonoBehaviour
                 IHealth health = enemy.GetComponent<IHealth>();
                 if (health != null && health is BasicHealth basicHealth)
                 {
+                    // Verhoog max health als huidige gezondheid al maximaal is
                     if (basicHealth.Current >= basicHealth.Max)
                         basicHealth.SetMaxHealth(basicHealth.Max + _healAmount);
 
@@ -64,7 +78,7 @@ public class AreaHealer : MonoBehaviour
             }
         }
 
-        // Toon visual alleen als er gehealed is
+        // Toon de healing aura alleen als er daadwerkelijk genezen is
         if (didHeal && _healingAuraInstance != null)
         {
             _healingAuraInstance.Show();
